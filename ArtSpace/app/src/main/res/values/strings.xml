@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Art Space</string>
+
+    <string name="art_1_name">The Bedroom</string>
+    <string name="art_1_artist">Vincent van Gogh</string>
+    <string name="art_1_year">1889</string>
+
+    <string name="art_2_name">Paris Street; Rainy Day</string>
+    <string name="art_2_artist">Gustave Caillebotte</string>
+    <string name="art_2_year">1877</string>
+    
+    <string name="art_3_name">Under the Wave off Kanagawa (Kanagawa oki nami ura), also known as The Great Wave, from the series “Thirty-Six Views of Mount Fuji (Fugaku sanjūrokkei)”</string>
+    <string name="art_3_artist">Katsushika Hokusai 葛飾 北斎</string>
+    <string name="art_3_year">1830/33</string>
+    <string name="prev_btn">Previous</string>
+    <string name="next_btn">Next</string>
+</resources>
