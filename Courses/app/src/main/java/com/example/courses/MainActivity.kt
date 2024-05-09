@@ -3,8 +3,8 @@ package com.example.courses
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -14,8 +14,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -57,47 +58,20 @@ fun CoursesApp(modifier: Modifier = Modifier) {
 
 @Composable
 fun TopicGrid(topics: List<Topic>, modifier: Modifier = Modifier) {
-    LazyColumn(modifier = modifier) {
-        items(topics.pairs()) {
-            Row {
-                val mod = Modifier
-                    .weight(1f)
-                    .padding(4.dp)
+    val spacing = Arrangement.spacedBy(8.dp)
 
-                TopicItem(topic = it.first, modifier = mod)
-                it.second?.let { TopicItem(topic = it, modifier = mod) }
-            }
+    LazyVerticalGrid(
+        modifier = modifier.padding(8.dp),
+        columns = GridCells.Fixed(2),
+        verticalArrangement = spacing,
+        horizontalArrangement = spacing
+    ) {
+        items(topics) {
+            TopicItem(topic = it)
         }
     }
 }
 
-@VisibleForTesting
-internal fun <T> Iterable<T>.pairs(): List<Pair<T, T?>> {
-    val it = iterator()
-    val res = mutableListOf<Pair<T, T?>>()
-    var currentPair: Pair<T, T?>? = null
-
-    while (it.hasNext()) {
-        currentPair = when {
-            currentPair == null -> {
-                it.next() to null
-            }
-
-            currentPair.second == null -> {
-                currentPair.first to it.next()
-            }
-
-            else -> {
-                res.add(currentPair)
-                it.next() to null
-            }
-        }
-    }
-    if (currentPair != null) {
-        res.add(currentPair)
-    }
-    return res
-}
 
 @Composable
 fun TopicItem(topic: Topic, modifier: Modifier = Modifier) {
